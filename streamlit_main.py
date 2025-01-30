@@ -4,7 +4,7 @@ import pandas as pd
 # Load dataset
 #@st.cache
 def load_data():
-    url = 'https://healthdata.gov/resource/ektz-upmg.csv'
+    url = 'https://web.stanford.edu/class/archive/cs/cs109/cs109.1166/stuff/titanic.csv'
     data = pd.read_csv(url)
     return data
 
