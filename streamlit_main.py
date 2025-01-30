@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load dataset
-@st.cache
+#@st.cache
 def load_data():
     url = 'https://www.data.gouv.fr/fr/organizations/mission-tres-haut-debit/datasets-resources.csv'
     data = pd.read_csv(url)
