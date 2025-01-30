@@ -8,7 +8,18 @@ def load_data():
     data = pd.read_csv(url)
     return data
 
+# Function to convert DataFrame to Excel and return as a downloadable file
+def to_excel(df):
+    output = io.BytesIO()
+    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+        df.to_excel(writer, index=False, sheet_name='Sheet1')
+        writer.save()
+    processed_data = output.getvalue()
+    return processed_data
+
+
 data = load_data()
+df = data
 
 # Title of the app
 st.title('Dataset Filter App')
@@ -31,6 +42,14 @@ filters = {col: st.sidebar.multiselect(f'Select values for {col}', unique_values
 filtered_data = data.copy()
 for col, values in filters.items():
     filtered_data = filtered_data[filtered_data[col].isin(values)]
+
+if st.button('Download Excel'):
+    excel_data = to_excel(df)
+    st.download_button(label='Download Excel file',
+                       data=excel_data,
+                       file_name='dataframe.xlsx',
+                       mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
 
 # Display filtered data
 st.write('Filtered Dataset')
