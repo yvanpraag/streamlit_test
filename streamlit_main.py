@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import io
-import xlswriter
+import xlsxwriter
 
 # Load dataset
 #@st.cache
